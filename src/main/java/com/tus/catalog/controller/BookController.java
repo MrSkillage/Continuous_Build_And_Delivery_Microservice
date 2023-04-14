@@ -27,6 +27,10 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
+    public void newMethod() {
+    	System.out.println("A new method to Test the Webhook!");
+    }
+    
     @GetMapping("")
     public ResponseEntity<List<Book>> getAllBooks() {
         List<Book> books = bookService.getAllBooks();
