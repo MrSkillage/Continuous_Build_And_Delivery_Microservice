@@ -33,7 +33,7 @@ public class BookServiceTest {
     private BookService bookService;
     
     @Test
-    public void getAllBooks_TestSuccess() {
+    public void getAllBooksTestSuccess() {
         List<Book> books = new ArrayList<>();
         books.add(buildBook());
         Book book2 = buildBook();
@@ -45,7 +45,7 @@ public class BookServiceTest {
     }
     
     @Test
-    public void getBookById_TestSuccess() {
+    public void getBookByIdTestSuccess() {
         Book book = buildBook();
         when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
         Optional<Book> result = bookService.getBookById(1L);
@@ -59,7 +59,7 @@ public class BookServiceTest {
     }
     
     @Test
-    public void createBook_TestSuccess() {
+    public void createBookTestSuccess() {
         Book book = buildBook();
         Book savedBook = buildBook();
         when(bookRepository.save(book)).thenReturn(savedBook);
@@ -68,7 +68,7 @@ public class BookServiceTest {
     }
     
     @Test
-    public void UpdateBook_TestSuccess() {
+    public void UpdateBookTestSuccess() {
         // Arrange
         Long bookId = 1L;
         Book existingBook = buildBook();
@@ -91,7 +91,7 @@ public class BookServiceTest {
     }
     
     @Test
-    public void UpdateBook_TestFailure() {
+    public void UpdateBookTestFailure() {
         // Arrange
         Long bookId = 1L;
         Book updatedBook = buildBook();
@@ -109,7 +109,7 @@ public class BookServiceTest {
     }
     
     @Test
-    public void DeleteBookById_TestSuccess() {
+    public void DeleteBookByIdTestSuccess() {
         // Arrange
         Long bookId = 1L;
         Book existingBook = buildBook();
@@ -127,7 +127,7 @@ public class BookServiceTest {
     }
     
     @Test
-    public void DeleteBookById_TestFailure() {
+    public void DeleteBookByIdTestFailure() {
         // Arrange
         Long bookId = 1L;
 

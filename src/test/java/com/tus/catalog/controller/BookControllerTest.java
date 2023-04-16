@@ -43,7 +43,7 @@ public class BookControllerTest {
     private ObjectMapper objectMapper;
 	
 	@Test
-	public void addBook_TestSuccess() {
+	public void addBookTestSuccess() {
 		Book book = buildBook();
 		Book savedBook = buildBook();
 		when(bookService.createBook(book)).thenReturn(savedBook);	
@@ -55,7 +55,7 @@ public class BookControllerTest {
 	}
 	
 	@Test
-	public void getBookById_TestSuccess() {
+	public void getBookByIdTestSuccess() {
 	    Long bookId = 1L;
 	    Book book = buildBook();
 	    book.setId(bookId);
@@ -66,7 +66,7 @@ public class BookControllerTest {
 	}
 	
 	@Test
-	public void getBookById_TestNotFound() {
+	public void getBookByIdTestNotFound() {
 	    Long bookId = 1L;
 	    when(bookService.getBookById(bookId)).thenReturn(Optional.empty());
 	    ResponseEntity<Book> response = bookController.getBookById(bookId);
@@ -75,7 +75,7 @@ public class BookControllerTest {
 	}
 	
 	@Test
-	public void getAllBooks_TestSuccess() {
+	public void getAllBooksTestSuccess() {
 	    List<Book> books = new ArrayList<>();
 	    books.add(buildBook());
 	    books.add(buildBook());
@@ -87,7 +87,7 @@ public class BookControllerTest {
 	}
 
 	@Test
-	public void deleteBook_TestSuccess() {
+	public void deleteBookTestSuccess() {
 	    Long bookId = 1L;
 	    when(bookService.getBookById(bookId)).thenReturn(Optional.of(buildBook()));
 	    ResponseEntity<?> response = bookController.deleteBook(bookId);
@@ -95,7 +95,7 @@ public class BookControllerTest {
 	}
 
 	@Test
-	public void deleteBook_TestNotFound() {
+	public void deleteBookTestNotFound() {
 	    Long bookId = 1L;
 	    when(bookService.getBookById(bookId)).thenReturn(Optional.empty());
 	    ResponseEntity<?> response = bookController.deleteBook(bookId);
@@ -113,7 +113,7 @@ public class BookControllerTest {
 	}
 	
 	@Test
-	public void updateBook_TestSuccess() {
+	public void updateBookTestSuccess() {
 	    Long bookId = 1L;
 	    Book originalBook = buildBook();
 	    originalBook.setId(bookId);
@@ -128,7 +128,7 @@ public class BookControllerTest {
 	}
 
 	@Test
-	public void updateBook_TestNotFound() {
+	public void updateBookTestNotFound() {
 	    Long bookId = 1L;
 	    Book updatedBook = buildBook();
 	    when(bookService.getBookById(bookId)).thenReturn(Optional.empty());
