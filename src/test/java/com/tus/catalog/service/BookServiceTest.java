@@ -49,8 +49,13 @@ public class BookServiceTest {
         Book book = buildBook();
         when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
         Optional<Book> result = bookService.getBookById(1L);
-        assertTrue(result.isPresent());
-        assertEquals(book, result.get());
+
+        result.ifPresent(bookResult -> {
+            assertEquals(book, bookResult);
+        });
+
+        // Assert that result is not empty
+        assertTrue(result.isPresent(), "Expected a book but found none");
     }
     
     @Test

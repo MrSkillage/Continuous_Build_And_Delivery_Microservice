@@ -2,8 +2,11 @@ package com.tus.catalog.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.List;
 import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -24,21 +27,23 @@ public class BookRepositoryIntegrationTest {
 
 	@Test
 	public void testSaveAndFindById() {
-		// Arrange
-		Book book = new Book();
-		book.setAuthor("Frank Herbert");
-		book.setTitle("Dune");
-		book.setDescription("Epic science fiction novel");
-		book.setPrice(24.99);
+	    // Arrange
+	    Book book = new Book();
+	    book.setAuthor("Frank Herbert");
+	    book.setTitle("Dune");
+	    book.setDescription("Epic science fiction novel");
+	    book.setPrice(24.99);
+	    // Act
+	    Book savedBook = entityManager.persistAndFlush(book);
+	    Optional<Book> foundBook = bookRepository.findById(savedBook.getId());
+	    // Assert
+	    foundBook.ifPresent(bookResult -> {
+	        assertThat(bookResult.getTitle()).isEqualTo(book.getTitle());
+	        assertThat(bookResult.getAuthor()).isEqualTo(book.getAuthor());
+	    });
 
-		// Act
-		Book savedBook = entityManager.persistAndFlush(book);
-		Optional<Book> foundBook = bookRepository.findById(savedBook.getId());
-
-		// Assert
-		assertThat(foundBook).isPresent();
-		assertThat(foundBook.get().getTitle()).isEqualTo(book.getTitle());
-		assertThat(foundBook.get().getAuthor()).isEqualTo(book.getAuthor());
+	    // Assert that foundBook is not empty
+	    assertTrue(foundBook.isPresent(), "Expected a book but found none");
 	}
 
 	@Test
@@ -76,10 +81,13 @@ public class BookRepositoryIntegrationTest {
 		// Act
 		Optional<Book> book = bookRepository.findByTitle(title);
 
+		book.ifPresent(bookResult -> {
+	        assertThat(bookResult.getTitle()).isEqualTo(title);
+	        assertThat(bookResult.getAuthor()).isEqualTo("Frank Herbert");
+	    });
+		
 		// Assert
-		assertThat(book).isPresent();
-		assertThat(book.get().getTitle()).isEqualTo(title);
-		assertThat(book.get().getAuthor()).isEqualTo("Frank Herbert");
+		assertTrue(book.isPresent(), "Expected a book but found none");
 	}
 
 	@Test
