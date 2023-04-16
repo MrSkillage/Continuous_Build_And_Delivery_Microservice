@@ -2,5 +2,5 @@ projectKey=java-sonar-scanner-demo
 serverUrl=http://localhost:9000
 serverVersion=9.6.1.59531
 dashboardUrl=http://localhost:9000/dashboard?id=java-sonar-scanner-demo
-ceTaskId=AYd7hG1COaXEtd6RqaQv
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AYd7hG1COaXEtd6RqaQv
+ceTaskId=AYeKIXj-qTLn2POSMHNf
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYeKIXj-qTLn2POSMHNf
