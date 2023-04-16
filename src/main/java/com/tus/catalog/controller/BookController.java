@@ -26,6 +26,12 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+
+    /*
+    public void newMethod() {
+    	System.out.println("A new method to Test the Webhook!");
+    }
+    */
     
     @GetMapping("")
     public ResponseEntity<List<Book>> getAllBooks() {
@@ -66,10 +72,12 @@ public class BookController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updateBook(@PathVariable(value = "id") Long bookId, 
     		@Valid @RequestBody Book bookDetails) {
+    	Optional<Book> book = bookService.getBookById(bookId);
+    	if (!book.isPresent()) {
+    		return ResponseEntity.notFound().build();
+    	}
     	Book updatedBook = bookService.updateBook(bookId, bookDetails);
     	return ResponseEntity.ok(updatedBook);
-    }
- 
-    
+    }   
     
 }
