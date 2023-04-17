@@ -70,7 +70,7 @@ public class BookRepositoryIntegrationTest {
 		List<Book> books = bookRepository.findAll();
 
 		// Assert
-		assertEquals(6, books.size(), "Expected 4 books, but found: " + books.size());
+		assertEquals(6, books.size(), "Expected 6 books, but found: " + books.size());
 	}
 
 	@Test
